@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Food Kit — Details</title>
+    <style>
+      body{ font-family:Arial,Helvetica,sans-serif; margin:0; background:#fff7f0 }
+      .top{ background:linear-gradient(90deg,#ff9a9e,#ffd194); color:#fff; padding:22px; text-align:center }
+      .wrap{ max-width:900px; margin:28px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.06) }
+      .price{ font-size:22px; font-weight:800; color:#d84315 }
+      ul{ color:#374151 }
+      .actions{ margin-top:18px }
+      a.btn{ background:#ff6f61; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700 }
+      a.back{ margin-left:12px; color:#374151 }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <h1>Food Kit</h1>
+      <p>Nutritious products for everyday needs</p>
+    </div>
+
+    <main class="wrap">
+      <!-- Larger version of the Food Kit image (same style as on all-products but bigger) -->
+      <img src="food-kit.jpg" alt="Food Kit Image" style="width:100%; height:auto; border-radius:10px; margin-bottom:18px;" />
+
+      <div style="display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start">
+        <div>
+          <h2>What's inside</h2>
+          <ul style="list-style:none; padding:0; margin:0; color:#374151">
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0e6da;"><span>Protein Powder (200g)</span><strong>₹300</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0e6da;"><span>Banana (7 pcs)</span><strong>₹50</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0e6da;"><span>Oats (500g)</span><strong>₹90</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0e6da;"><span>Cereal (250g)</span><strong>₹110</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f0e6da;"><span>Protein Bars (7 pcs)</span><strong>₹490</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0;"><span>Coffee Powder (250g)</span><strong>₹200</strong></li>
+          </ul>
+
+          <p style="margin-top:18px; color:#374151"><strong>Summary:</strong> A complete nutrition kit for students with daily breakfast items, energy boosters, and essential supplements.</p>
+        </div>
+
+        <aside style="background:linear-gradient(180deg,#fff5e6,#fffaf0); padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.05);">
+          <h3 style="margin:0 0 8px 0; font-size:16px">Price Summary</h3>
+          <div style="display:flex; justify-content:space-between; color:#6b7280; margin-top:8px"><span>Market Total</span><strong>₹1,240</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-top:6px"><span>Our Price (Sale)</span><strong style="color:#d84315">₹900</strong></div>
+          <div style="margin-top:12px; padding:10px; border-radius:8px; background:#fff;">
+            <div style="display:flex; justify-content:space-between; color:#374151"><span>Subscription Eligible</span><strong>Yes</strong></div>
+            <div style="display:flex; justify-content:space-between; margin-top:6px"><span>Subscription Discount (10%)</span><strong>₹810</strong></div>
+            <div style="font-size:13px; color:#6b7280; margin-top:6px">(₹810 final subscription price)</div>
+          </div>
+
+          <div style="margin-top:14px; text-align:center">
+            <a class="btn" href="#" onclick="return buy('Food Kit')">Buy now</a>
+            <div style="margin-top:10px"><a class="back" href="all-products.html">Back to products</a></div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    
+    <script>
+      (function(){
+        // Configure these values for your n8n setup.
+        // Example webhook URL: 'https://example.n8n.cloud/webhook/MyWebhook'
+        const N8N_WEBHOOK = '';
+        // Optional: the chatbot/UI URL to open after sending the product name.
+        // If empty, we will open the webhook URL (with product query) in a new tab.
+        const N8N_CHAT_UI = '';
+
+        window.buy = function(product){
+          // If webhook not configured, open UI with product param as fallback
+          if(!N8N_WEBHOOK){
+            const fallback = N8N_CHAT_UI || ('?product=' + encodeURIComponent(product));
+            window.open(fallback, '_blank');
+            return false;
+          }
+
+          // Send product name to n8n webhook
+          try{
+            fetch(N8N_WEBHOOK, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ product: product })
+            }).catch(()=>{/* ignore network errors */}).finally(()=>{
+              const openUrl = N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product));
+              window.open(openUrl, '_blank');
+            });
+          }catch(e){
+            const openUrl = N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product));
+            window.open(openUrl, '_blank');
+          }
+
+          return false;
+        };
+      })();
+    </script>
+  </body>
+</html>
