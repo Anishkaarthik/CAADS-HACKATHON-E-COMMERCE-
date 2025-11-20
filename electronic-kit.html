@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Electronic Kit — Details</title>
+    <style>
+      body{ font-family:Arial,Helvetica,sans-serif; margin:0; background:#f0f8ff }
+      .top{ background:linear-gradient(90deg,#89f7fe,#66a6ff); color:#032b4b; padding:22px; text-align:center }
+      .wrap{ max-width:900px; margin:28px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.06) }
+      .price{ font-size:20px; font-weight:800; color:#0a58ca }
+      ul{ color:#374151 }
+      .actions{ margin-top:18px }
+      a.btn{ background:#0077b6; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700 }
+      a.back{ margin-left:12px; color:#374151 }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <h1>Electronic Kit</h1>
+      <p>Small electronics to keep you powered and connected</p>
+    </div>
+
+    <main class="wrap">
+      <!-- Larger version of the Electronic Kit image (matching all-products but bigger) -->
+      <img src="electronickit.jpg" alt="Electronic Kit Image" style="width:100%; height:auto; border-radius:10px; margin-bottom:18px;" />
+
+      <div style="display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start">
+        <div>
+          <h2>What's included</h2>
+          <ul style="list-style:none; padding:0; margin:0; color:#374151">
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eef6fb;"><span>Power Bank (1)</span><strong>₹700</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eef6fb;"><span>Charger + Cable (1 each)</span><strong>₹500</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eef6fb;"><span>Mouse + Keyboard (1 each)</span><strong>₹650</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eef6fb;"><span>Batteries (Pack of 6 AA)</span><strong>₹150</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0;"><span>Earphones (1)</span><strong>₹400</strong></li>
+          </ul>
+
+          <p style="margin-top:18px; color:#374151"><strong>Summary:</strong> A complete electronics essentials kit with charging gear, computer accessories, and audio support items.</p>
+        </div>
+
+        <aside style="background:linear-gradient(180deg,#e8f7ff,#f4fbff); padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.04);">
+          <h3 style="margin:0 0 8px 0; font-size:16px">Price Summary</h3>
+          <div style="display:flex; justify-content:space-between; color:#6b7280; margin-top:8px"><span>Market Total</span><strong>₹2,400</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-top:6px"><span>Our Price</span><strong style="color:#0a58ca">₹2,000</strong></div>
+
+          <div style="margin-top:14px; text-align:center">
+            <a class="btn" href="#" onclick="return buy('Electronic Kit')">Buy now</a>
+            <div style="margin-top:10px"><a class="back" href="all-products.html">Back to products</a></div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <script>
+      (function(){
+        const N8N_WEBHOOK = '';
+        const N8N_CHAT_UI = '';
+        window.buy = window.buy || function(product){
+          if(!N8N_WEBHOOK){
+            const fallback = N8N_CHAT_UI || ('?product=' + encodeURIComponent(product));
+            window.open(fallback, '_blank');
+            return false;
+          }
+          try{
+            fetch(N8N_WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({product}) })
+            .catch(()=>{}).finally(()=>{ window.open(N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product)), '_blank'); });
+          }catch(e){ window.open(N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product)), '_blank'); }
+          return false;
+        };
+      })();
+    </script>
+  </body>
+</html>

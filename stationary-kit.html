@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Stationary Kit — Details</title>
+    <style>
+      body{ font-family:Arial,Helvetica,sans-serif; margin:0; background:#f7fff5 }
+      .top{ background:linear-gradient(90deg,#b8e994,#60d394); color:#073b3a; padding:22px; text-align:center }
+      .wrap{ max-width:900px; margin:28px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,0.06) }
+      .price{ font-size:20px; font-weight:800; color:#0b6b3a }
+      ul{ color:#374151 }
+      .actions{ margin-top:18px }
+      a.btn{ background:#06b53c; color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700 }
+      a.back{ margin-left:12px; color:#374151 }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <h1>Stationary Kit</h1>
+      <p>Essential pens, notebooks and supplies for study and work</p>
+    </div>
+
+    <main class="wrap">
+      <!-- Larger version of the Stationary Kit image (matching all-products but bigger) -->
+      <img src="stationarykit.jpg" alt="Stationary Kit Image" style="width:100%; height:auto; border-radius:10px; margin-bottom:18px;" />
+
+      <div style="display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start">
+        <div>
+          <h2>Contents</h2>
+          <ul style="list-style:none; padding:0; margin:0; color:#374151">
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Pen (10 pcs)</span><strong>₹100</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Pencil (5 pcs)</span><strong>₹25</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Glue Stick (1)</span><strong>₹50</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Blue Books (5 pcs)</span><strong>₹100</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Record Books (3 pcs)</span><strong>₹330</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Observation Books (3 pcs)</span><strong>₹150</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f7f0e6;"><span>Notebook (5 pcs)</span><strong>₹350</strong></li>
+            <li style="display:flex; justify-content:space-between; padding:10px 0;"><span>Pouch (1)</span><strong>₹200</strong></li>
+          </ul>
+
+          <p style="margin-top:18px; color:#374151"><strong>Summary:</strong> A complete stationery kit for engineering/college students covering writing, record books, and essential academic materials.</p>
+         
+        </div>
+
+        <aside style="background:linear-gradient(180deg,#fff8e6,#fffaf3); padding:18px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.04);">
+          <h3 style="margin:0 0 8px 0; font-size:16px">Price Summary</h3>
+          <div style="display:flex; justify-content:space-between; color:#6b7280; margin-top:8px"><span>Market Total</span><strong>₹1,285</strong></div>
+          <div style="display:flex; justify-content:space-between; margin-top:6px"><span>Our Price</span><strong style="color:#0b6b3a">₹1,000</strong></div>
+
+          <div style="margin-top:14px; text-align:center">
+            <a class="btn" href="#" onclick="return buy('Stationary Kit')">Buy now</a>
+            <div style="margin-top:10px"><a class="back" href="all-products.html">Back to products</a></div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <script>
+      (function(){
+        const N8N_WEBHOOK = '';
+        const N8N_CHAT_UI = '';
+        window.buy = window.buy || function(product){
+          if(!N8N_WEBHOOK){
+            const fallback = N8N_CHAT_UI || ('?product=' + encodeURIComponent(product));
+            window.open(fallback, '_blank');
+            return false;
+          }
+          try{
+            fetch(N8N_WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({product}) })
+            .catch(()=>{}).finally(()=>{ window.open(N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product)), '_blank'); });
+          }catch(e){ window.open(N8N_CHAT_UI || (N8N_WEBHOOK + '?product=' + encodeURIComponent(product)), '_blank'); }
+          return false;
+        };
+      })();
+    </script>
+  </body>
+</html>
